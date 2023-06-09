@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="toggle-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+            <img class="logo" onclick="reload()" src="/img/kisspng-pakistan-express-news-daily-express-breaking-news-5af59dfe48b522.8557161215260462062978.png" class="logo" alt="">
+       <div class="toggle-btn">
+            
+       </div>
+    </nav>
+
+    <div class="side-bar">
+        <div class="profile">
+            <img src="/img/simon.png" alt="">       
+        </div>
+        <div class="username">
+            <h3 id="usename" ></h3>
+        </div>
+        <hr>
+       
+        <div class="input-box">
+            <i class="uil uil-search" ></i>
+            <input type="text" id="search-text" placeholder="Search here..." />
+            <button id="search-button" class="button">Search</button>
+        </div>
+
+        <div class="slider">
+            <div class="icon"><img src="/img/messages.png" alt=""><p>Feed</p></div>
+            <div class="icon"><img src="/img/more.png" alt=""><p>News</p></div>
+            <div class="icon"><img src="/img/explore.png" alt=""><p>Trending</p></div>
+            <div class="icon"><img src="/img/history.png" alt=""><p>Explore</p></div>
+            <div class="icon"><img src="/img/notification.png" alt=""><p>Notification</p></div>
+            
+            <div class="icon"><img src="/img/more.png" alt=""><p>News</p></div>
+            <div class="icon"><img src="/img/explore.png" alt=""><p>Trending</p></div>
+            <div class="icon"><img src="/img/history.png" alt=""><p>Explore</p></div>
+            
+        </div>
+        
+        <div>
+            <a href="#" class="links">
+                <p>Home</p>
+            </a>
+            <a href="#" class="links">
+                <p>Explore</p>
+            </a>
+            <a href="#" class="links">
+                <p>Subcription</p>
+            </a>
+            <a href="#" class="links">
+                <p>Library</p>
+            </a>
+            <a href="#" class="links">
+                <p>History</p>
+            </a>   
+        </div>
+
+        <div class="logbtn">
+            <input id="logout"  type="button" value="Log Out">
+        </div>
+
+                
+    </div>
+
+
+    <main>
+        <div class="card-container container" id="cards-container"></div>
+            
+    </main>
+
+    <template id="template-news-card">
+        
+            <div class="card">
+                <div class="card-header">
+                    <img  src="https://via.placeholder.com" alt="news-image" id="news-img">
+                </div>
+                <div class="mark">
+                    <img src="/img/kisspng-pakistan-express-news-daily-express-breaking-news-5af59dfe48b522.8557161215260462062978.png" alt="">
+                </div>
+                <div class="card-content">
+                    <h3 id="news-title">This is the Title</h3>
+                    <h6 class="news-source" id="news-source">End Gadget 26/08/2023</h6>
+                    <p class="news-desc" id="news-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae saepe quis voluptatum quisquam vitae doloremque facilis molestias quae ratione cumque!</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="/script.js"></script>
+    <script type="module">
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3hbePbY7kY1552bqCTAfX6m7vK6J3S-s",
+            authDomain: "inshorts-login.firebaseapp.com",
+            projectId: "inshorts-login",
+            storageBucket: "inshorts-login.appspot.com",
+            messagingSenderId: "613153138987",
+            appId: "1:613153138987:web:69a24dd01b5a68191f7d6e",
+            measurementId: "G-H7B6QCJHWP"
+        };
+      
+  
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        
+  
+    	  
+        document.getElementById("logout").addEventListener("click", function() {
+            signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                console.log('Sign-out successful.');
+                alert('Sign-out successful.');
+                window.location.replace("index.html")
+              })
+            .catch((error) => {
+                console.log('An error happened.');
+              });		  		  
+        });
+        
+        
+        
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.email;
+            document.getElementById("usename").innerHTML=uid
+            // ...
+        }
+        });
+       
+      </script>
+    
+</body>
+</html>
