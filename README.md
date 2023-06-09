@@ -1,2 +1,2 @@
 # News-Website
-Ideveloped this website using HTML, CSS, Js
+I developed this website using HTML, CSS, Js. 
